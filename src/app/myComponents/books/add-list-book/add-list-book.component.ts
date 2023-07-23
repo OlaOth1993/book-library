@@ -36,7 +36,13 @@ export class AddListBookComponent {
   //push the added book to the list and send it to the api
   add() {
     const selectedList = this.lists.filter((list) => list.id == this.selectedList)[0];
-    selectedList.books.push(this.data.book)
+    console.log(selectedList)
+    if (selectedList.books) {
+      selectedList.books.push(this.data.book)
+    }
+    else {
+      selectedList.books = [this.data.book]
+    }
     this.CRUDservice.updateListBook(selectedList).subscribe((data) => {
       this.dialogRef.close(data);
     })

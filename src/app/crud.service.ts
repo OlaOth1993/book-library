@@ -87,7 +87,7 @@ export class CRUDService {
   }
 
   updateBook(payload: Book) {
-    return this.http.put(`http://localhost:3000/lists/${payload.id}`, payload).pipe(
+    return this.http.put(`http://localhost:3000/books/${payload.id}`, payload).pipe(
       catchError(err => {
         console.log(err);
         return []

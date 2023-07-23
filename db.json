@@ -6,7 +6,7 @@
       "year": "1965",
       "author": "Frank Herbert",
       "image": "https://th.bing.com/th/id/R.91ce7d845af61203c6daa49e9bf66741?rik=CbAR6Z3wyqkFZQ&pid=ImgRaw&r=0",
-      "onList": true
+      "onList": false
     },
     {
       "id": 2,
@@ -22,14 +22,14 @@
       "year": "1949",
       "author": "George Orwell",
       "image": "https://th.bing.com/th/id/R.b9c0f16d77765d639d8bd6def6ccc122?rik=UC%2f3P4FKSUUtWA&riu=http%3a%2f%2fcrickhollowbooks.com.au%2fblog%2fwp-content%2fuploads%2f2012%2f05%2f9780141036144.jpg&ehk=nNAt0eHK1zSTMBmUBexnt0FVjMAHAH%2bBhp9T9U1lK2A%3d&risl=&pid=ImgRaw&r=0",
-      "onList": false
+      "onList": true
     },
     {
       "id": 4,
       "title": "Fahrenheit 451",
       "year": "1953",
       "author": "Ray Bradbury",
-      "onList": false,
+      "onList": true,
       "image": "https://th.bing.com/th/id/R.771b27345a5515f8abece8e4616c25fd?rik=hlXTktk7OJjVzA&pid=ImgRaw&r=0"
     },
     {
@@ -43,24 +43,52 @@
   ],
   "lists": [
     {
-      "id": 1,
-      "title": "Dune",
-      "year": "1965",
-      "author": "Frank Herbert",
-      "image": "https://th.bing.com/th/id/R.91ce7d845af61203c6daa49e9bf66741?rik=CbAR6Z3wyqkFZQ&pid=ImgRaw&r=0",
-      "onList": false
-    },
-    {
       "id": 2,
       "title": "Movies",
       "books": [
+        {
+          "id": 3,
+          "title": "1984",
+          "year": "1949",
+          "author": "George Orwell",
+          "image": "https://th.bing.com/th/id/R.b9c0f16d77765d639d8bd6def6ccc122?rik=UC%2f3P4FKSUUtWA&riu=http%3a%2f%2fcrickhollowbooks.com.au%2fblog%2fwp-content%2fuploads%2f2012%2f05%2f9780141036144.jpg&ehk=nNAt0eHK1zSTMBmUBexnt0FVjMAHAH%2bBhp9T9U1lK2A%3d&risl=&pid=ImgRaw&r=0",
+          "onList": true
+        },
         {
           "id": 2,
           "title": "Ender's Game",
           "year": "1985",
           "author": "Orson Scott Card",
-          "onList": false,
+          "onList": true,
           "image": "https://th.bing.com/th/id/R.d682b484004e5cb393c99b5cb416c083?rik=LlSAjMbh96acZQ&pid=ImgRaw&r=0"
+        }
+      ]
+    },
+    {
+      "title": "to read",
+      "id": 3,
+      "books": [
+        {
+          "id": 5,
+          "title": "Brave New World",
+          "year": "1932",
+          "author": "Aldous Huxley",
+          "image": "https://th.bing.com/th/id/R.384434f8e97168ad4d3f9a7146690d0a?rik=A74B4I6pGm0Ncw&pid=ImgRaw&r=0",
+          "onList": false
+        }
+      ]
+    },
+    {
+      "title": "to read later",
+      "id": 4,
+      "books": [
+        {
+          "id": 4,
+          "title": "Fahrenheit 451",
+          "year": "1953",
+          "author": "Ray Bradbury",
+          "onList": false,
+          "image": "https://th.bing.com/th/id/R.771b27345a5515f8abece8e4616c25fd?rik=hlXTktk7OJjVzA&pid=ImgRaw&r=0"
         }
       ]
     }
