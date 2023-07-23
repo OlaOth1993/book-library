@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+    margin: 0 !important;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+
+    &>* {
+        width: 100%;
+    }
+}
+
+
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    #books-toolbar {
+        background-color: transparent;
+    }
+
+    .card {
+        flex: 1 1 auto;
+        margin: 0.5em;
+        max-width: 200px;
+
+        .book-image {
+            height: 200px;
+        }
+    }
+}

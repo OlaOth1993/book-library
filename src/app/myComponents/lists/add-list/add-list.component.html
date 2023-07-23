@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Add List</h2>
+<mat-dialog-content>
+  <form class="form-container" [formGroup]="listForm" (ngSubmit)="create()">
+    <mat-form-field>
+      <mat-label>List name</mat-label>
+      <input matInput formControlName="title" required>
+    </mat-form-field>
+    <button mat-button type="submit" mat-raised-button color="primary">Add</button>
+  </form>
+</mat-dialog-content>

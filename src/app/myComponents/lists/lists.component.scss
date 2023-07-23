@@ -1,0 +1,23 @@
+.wrapper {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin: 3.5rem;
+}
+
+.title {
+    display: flex;
+    width: 100%;
+
+    h2 {
+        padding-right: 1rem;
+    }
+}
+
+.card-wrapper {
+    padding: 1em;
+    border: 1px #e6e4e4 solid;
+}
+
+.no-border {
+    border: none;
+}

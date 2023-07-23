@@ -1,0 +1,7 @@
+<div class="card-wrapper">
+  <mat-toolbar id="books-toolbar">My Books</mat-toolbar>
+  <div *ngFor="let book of books()" class="card">
+    <app-bookcard [book]="book" [isAddToList]="true" (addToListClick)="openAddDialog(book)"></app-bookcard>
+  </div>
+
+</div>

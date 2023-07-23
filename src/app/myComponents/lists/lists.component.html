@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <mat-toolbar id="books-toolbar">My Lists
+        <span class="spacer"></span>
+        <button mat-button routerLink="lists" (click)="openDialog()">Add List
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="card-wrapper p-2" *ngFor="let list of allLists; let i = index;">
+        <div class="title">
+            <h3>{{list.title}}</h3>
+            <span class="spacer"></span>
+            <mat-divider [vertical]="true"></mat-divider>
+            <button mat-button (click)="openDeleteDialog(list.id)"><mat-icon>delete_sweep</mat-icon></button>
+            <mat-divider [vertical]="true"></mat-divider>
+            <button mat-button (click)="goToBooks()"><mat-icon>add</mat-icon></button>
+        </div>
+        <div cdkDropList class="card-wrapper no-border" (cdkDropListDropped)="drop($event,list)">
+            <mat-card class="card" *ngFor="let book of list.books; let j = index;" cdkDrag>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h4>{{book.title}}</h4>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <h5>by {{book.author}}</h5>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <img class="book-image" mat-card-image src="{{book.image}}" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <h5>
+                        Year of publish: {{book.year}}
+                    </h5>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button color="primary">Move
+                        <mat-icon>swap_horiz</mat-icon>
+                    </button>
+                    <button mat-button color="warn" (click)="removeBook(list.id,i,j)">Remove
+                        <mat-icon>delete_sweep</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+
+    </div>
+</div>
