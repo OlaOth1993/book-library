@@ -52,7 +52,6 @@ export class ListsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
 
       if (result) {
         this.getMyLists();
@@ -72,7 +71,6 @@ export class ListsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
       this.getMyLists();
       //use signals update data
 
@@ -90,7 +88,6 @@ export class ListsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
       this.getMyLists();
       deletedBook.onList = false;
       this.updateBookStatus(deletedBook);
