@@ -3,7 +3,7 @@
   <form class="form-container" (ngSubmit)="add()">
     <mat-form-field>
       <mat-select placeholder="Favorite lists" [(ngModel)]="selectedList" name="food">
-        <mat-option *ngFor="let list of lists" [value]="list.id">
+        <mat-option *ngFor="let list of lists()" [value]="list.id">
           {{list.title}}
         </mat-option>
       </mat-select>

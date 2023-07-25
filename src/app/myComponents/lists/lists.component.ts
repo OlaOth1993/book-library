@@ -24,25 +24,15 @@ import { Book } from '../books/book';
   styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent implements OnInit {
-  allLists: List[] = [];
 
   //component signals
-  //lists = this.CRUDservice.lists;
+  lists = this.CRUDservice.lists;
 
   constructor(private CRUDservice: CRUDService,
     public dialog: MatDialog,
     private router: Router) { }
 
-  ngOnInit() {
-    this.getMyLists()
-  }
-
-  getMyLists() {
-    this.CRUDservice.getLists()
-      .subscribe((data) => {
-        this.allLists = data;
-      })
-  }
+  ngOnInit() { }
 
 
   //Add list in dialog 
@@ -54,9 +44,9 @@ export class ListsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.getMyLists();
+
         //use signals update data
-        // this.lists.mutate(value=>{})
+        this.lists.mutate(value => { value.push(result) })
 
       }
     });
@@ -71,8 +61,15 @@ export class ListsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getMyLists();
+
       //use signals update data
+      this.lists.mutate(value => {
+        var index = value.map(x => {
+          return x.id;
+        }).indexOf(id);
+
+        value.splice(index, 1);
+      })
 
     });
   }
@@ -81,24 +78,30 @@ export class ListsComponent implements OnInit {
   removeBook(listId: number, listIndex: number, bookIndex: number) {
     //delete the choosen book from its list by splice
     //and send the updated list to dialog component where the update api call 
-    const deletedBook = this.allLists[listIndex].books.splice(bookIndex, 1)[0];
+    let listsCopy = JSON.parse(JSON.stringify(this.lists()));
+    const deletedBook = listsCopy[listIndex].books.splice(bookIndex, 1)[0];
     const dialogRef = this.dialog.open(DeleteBookComponent, {
       width: '300px',
-      data: { listId: listId, updatedList: this.allLists[listIndex] },
+      data: { listId: listId, updatedList: listsCopy[listIndex] },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getMyLists();
+
+      this.lists.mutate((value => {
+        value[listIndex].books.splice(bookIndex, 1);
+      }))
+
+      console.log(this.lists())
       deletedBook.onList = false;
       this.updateBookStatus(deletedBook);
-      //use signals update data
 
     });
   }
 
   //update the book status of being out the list
   updateBookStatus(book: Book) {
-    this.CRUDservice.updateBook(book).subscribe()
+    console.log('book', book)
+    this.CRUDservice.updateBook(book).subscribe();
   }
 
   //get the sorted array after drag and drop 

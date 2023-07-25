@@ -27,13 +27,12 @@ export class BooksComponent {
   books = this.CRUDservice.books;
 
 
-  getMyBooks() {
-    this.CRUDservice.getBooks()
-      .subscribe((data) => {
-        console.log(data)
-        this.allBooks = data;
-      })
-  }
+  /* getMyBooks() {
+     this.CRUDservice.getBooks()
+       .subscribe((data) => {
+         this.allBooks = data;
+       })
+   } */
 
 
   //open dialog to choose list to add the book
@@ -44,7 +43,6 @@ export class BooksComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
       if (result) {
         book.onList = true;
         this.updateBookStatus(book);
@@ -57,7 +55,7 @@ export class BooksComponent {
   updateBookStatus(book: Book) {
     this.CRUDservice.updateBook(book).subscribe(() => {
       //this.books.mutate()
-      this.getMyBooks();
+      //this.getMyBooks();
     })
   }
 }

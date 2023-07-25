@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Observable, catchError, of, tap } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 import { Book } from './myComponents/books/book';
 import { List } from './myComponents/lists/list';
@@ -13,42 +13,22 @@ export class CRUDService {
 
   constructor(private http: HttpClient) { }
 
-  private books$ = this.http.get<Book[]>("http://localhost:3000/books").pipe(
-    catchError(err => {
-      console.log(err);
-      return []
-    })
-  )
+  //signals
+  lists = signal<List[]>([]);
+  books = signal<Book[]>([]);
 
-  private lists$ = this.http.get<List[]>("http://localhost:3000/lists").pipe(
-    catchError(err => {
-      console.log(err);
-      return []
-    })
-  )
+  private getBooks = this.http.get<Book[]>("http://localhost:3000/books").pipe(
+    tap(data => this.books.set(data)),
+    takeUntilDestroyed(),
+    catchError(() => of([] as Book[]))
+  ).subscribe();
 
-  //Expose signals from the service
-  books = toSignal<Book[], Book[]>(this.books$, { initialValue: [] });
-  lists = toSignal<List[], List[]>(this.lists$, { initialValue: [] });
+  private getLists = this.http.get<List[]>("http://localhost:3000/lists").pipe(
+    tap(data => this.lists.set(data)),
+    takeUntilDestroyed(),
+    catchError(() => of([] as List[]))
+  ).subscribe();
 
-
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>("http://localhost:3000/books").pipe(
-      catchError(err => {
-        console.log(err);
-        return []
-      })
-    )
-  }
-
-  getLists(): Observable<List[]> {
-    return this.http.get<List[]>("http://localhost:3000/lists").pipe(
-      catchError(err => {
-        console.log(err);
-        return []
-      })
-    )
-  }
 
   addList(payload: List) {
     return this.http.post("http://localhost:3000/lists", payload).pipe(

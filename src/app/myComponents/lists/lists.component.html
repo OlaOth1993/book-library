@@ -5,7 +5,7 @@
             <mat-icon>add</mat-icon>
         </button>
     </mat-toolbar>
-    <div class="card-wrapper p-2" *ngFor="let list of allLists; let i = index;">
+    <div class="card-wrapper p-2" *ngFor="let list of lists(); let i = index;">
         <div class="title">
             <h3>{{list.title}}</h3>
             <span class="spacer"></span>

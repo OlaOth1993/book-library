@@ -18,24 +18,16 @@ import { List } from '../../lists/list';
 })
 export class AddListBookComponent {
   selectedList = -1;
-  lists: List[] = [];
+  lists = this.CRUDservice.lists;
 
   constructor(
     public dialogRef: MatDialogRef<AddListBookComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private CRUDservice: CRUDService,) {
-    this.getLists();
-  }
-
-  getLists() {
-    this.CRUDservice.getLists().subscribe((data) => {
-      this.lists = data;
-    })
-  }
+    private CRUDservice: CRUDService,) { }
 
   //push the added book to the list and send it to the api
   add() {
-    const selectedList = this.lists.filter((list) => list.id == this.selectedList)[0];
+    const selectedList = this.lists().filter((list) => list.id == this.selectedList)[0];
     if (selectedList.books) {
       selectedList.books.push(this.data.book)
     }

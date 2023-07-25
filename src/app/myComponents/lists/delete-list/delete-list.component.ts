@@ -21,7 +21,7 @@ export class DeleteListComponent {
 
   delete() {
     this.CRUDservice.DeleteList(this.data.id).subscribe(() => {
-      this.dialogRef.close();
+      this.dialogRef.close(this.data.id);
     })
   }
 
