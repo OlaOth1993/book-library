@@ -16,7 +16,7 @@ import { Book } from '../book';
 })
 export class BookcardComponent {
 
-  @Output() addToListClick = new EventEmitter<any>();
+  @Output() addToListClick = new EventEmitter<Book>();
   @Input() isAddToList = false;
   @Input() book: Book = {
     id: 0,

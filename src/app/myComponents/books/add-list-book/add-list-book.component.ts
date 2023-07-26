@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CRUDService } from 'src/app/crud.service';
-import { List } from '../../lists/list';
 
 @Component({
   selector: 'app-add-list-book',

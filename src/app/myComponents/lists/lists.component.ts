@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,7 +23,7 @@ import { Book } from '../books/book';
   templateUrl: './lists.component.html',
   styleUrls: ['./lists.component.scss']
 })
-export class ListsComponent implements OnInit {
+export class ListsComponent {
 
   //component signals
   lists = this.CRUDservice.lists;
@@ -31,8 +31,6 @@ export class ListsComponent implements OnInit {
   constructor(private CRUDservice: CRUDService,
     public dialog: MatDialog,
     private router: Router) { }
-
-  ngOnInit() { }
 
 
   //Add list in dialog 
@@ -60,11 +58,11 @@ export class ListsComponent implements OnInit {
       data: { id: id },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
 
       //use signals update data
       this.lists.mutate(value => {
-        var index = value.map(x => {
+        const index = value.map(x => {
           return x.id;
         }).indexOf(id);
 
@@ -78,14 +76,14 @@ export class ListsComponent implements OnInit {
   removeBook(listId: number, listIndex: number, bookIndex: number) {
     //delete the choosen book from its list by splice
     //and send the updated list to dialog component where the update api call 
-    let listsCopy = JSON.parse(JSON.stringify(this.lists()));
+    const listsCopy = JSON.parse(JSON.stringify(this.lists()));
     const deletedBook = listsCopy[listIndex].books.splice(bookIndex, 1)[0];
     const dialogRef = this.dialog.open(DeleteBookComponent, {
       width: '300px',
       data: { listId: listId, updatedList: listsCopy[listIndex] },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
 
       this.lists.mutate((value => {
         value[listIndex].books.splice(bookIndex, 1);
