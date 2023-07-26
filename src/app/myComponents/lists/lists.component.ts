@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -9,12 +9,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { AddListComponent } from './add-list/add-list.component';
 import { DeleteListComponent } from './delete-list/delete-list.component';
-import { DeleteBookComponent } from '../books/delete-book/delete-book.component';
+import { DeleteBookComponent } from './delete-book/delete-book.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CRUDService } from 'src/app/crud.service';
 import { List } from './list';
 import { Book } from '../books/book';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-lists',
@@ -23,7 +24,8 @@ import { Book } from '../books/book';
   templateUrl: './lists.component.html',
   styleUrls: ['./lists.component.scss']
 })
-export class ListsComponent {
+export class ListsComponent implements OnDestroy {
+  sub: Subscription[] = []
 
   //component signals
   lists = this.CRUDservice.lists;
@@ -39,15 +41,13 @@ export class ListsComponent {
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-
+    const sub1 = dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
         //use signals update data
         this.lists.mutate(value => { value.push(result) })
-
       }
     });
+    this.sub.push(sub1)
   }
 
 
@@ -58,8 +58,7 @@ export class ListsComponent {
       data: { id: id },
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-
+    const sub2 = dialogRef.afterClosed().subscribe(() => {
       //use signals update data
       this.lists.mutate(value => {
         const index = value.map(x => {
@@ -68,8 +67,8 @@ export class ListsComponent {
 
         value.splice(index, 1);
       })
-
     });
+    this.sub.push(sub2)
   }
 
   //Remove a book from a list 
@@ -98,8 +97,8 @@ export class ListsComponent {
 
   //update the book status of being out the list
   updateBookStatus(book: Book) {
-    console.log('book', book)
-    this.CRUDservice.updateBook(book).subscribe();
+    const sub3 = this.CRUDservice.updateBook(book).subscribe();
+    this.sub.push(sub3);
   }
 
   //get the sorted array after drag and drop 
@@ -110,10 +109,19 @@ export class ListsComponent {
 
   //update the api after sorting
   updateBookList(bookList: List) {
-    this.CRUDservice.updateListBook(bookList).subscribe()
+    const sub4 = this.CRUDservice.updateListBook(bookList).subscribe();
+    this.sub.push(sub4);
   }
 
   goToBooks() {
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy() {
+    if (this.sub.length > 0) {
+      this.sub.forEach((sub) => {
+        sub.unsubscribe();
+      })
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CRUDService } from 'src/app/crud.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-list-book',
@@ -15,9 +16,10 @@ import { CRUDService } from 'src/app/crud.service';
   templateUrl: './add-list-book.component.html',
   styleUrls: ['./add-list-book.component.scss']
 })
-export class AddListBookComponent {
+export class AddListBookComponent implements OnDestroy {
   selectedList = -1;
   lists = this.CRUDservice.lists;
+  sub: Subscription | undefined;
 
   constructor(
     public dialogRef: MatDialogRef<AddListBookComponent>,
@@ -33,10 +35,14 @@ export class AddListBookComponent {
     else {
       selectedList.books = [this.data.book]
     }
-    this.CRUDservice.updateListBook(selectedList).subscribe((data) => {
+    this.sub = this.CRUDservice.updateListBook(selectedList).subscribe((data) => {
       this.dialogRef.close(data);
     })
 
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
   }
 
 }

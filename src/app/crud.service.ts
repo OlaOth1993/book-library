@@ -75,6 +75,24 @@ export class CRUDService {
     )
   }
 
+  DeleteBook(id: number) {
+    return this.http.delete(`http://localhost:3000/books/${id}`).pipe(
+      catchError(err => {
+        console.log(err);
+        return []
+      })
+    );
+  }
+
+  addBook(payload: Book) {
+    return this.http.post("http://localhost:3000/books", payload).pipe(
+      catchError(err => {
+        console.log(err);
+        return []
+      })
+    )
+  }
+
 }
 
 

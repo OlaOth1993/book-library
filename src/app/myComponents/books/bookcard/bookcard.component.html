@@ -1,6 +1,13 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>{{book.title}}</mat-card-title>
+        <mat-card-title>
+            <div>
+                <span>{{book.title}}</span>
+                <Span>
+
+                </Span>
+            </div>
+        </mat-card-title>
         <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
     </mat-card-header>
     <img class="book-image" mat-card-image src="{{book.image}}" alt="Photo of a Shiba Inu">
@@ -12,6 +19,10 @@
     <mat-card-actions>
         <button *ngIf="!book.onList&&isAddToList" mat-button (click)="addToList(book)">Add to list
             <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+        <mat-divider [vertical]="true"></mat-divider>
+        <button mat-button (click)="delete(book.id)">
+            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
         </button>
     </mat-card-actions>
 </mat-card>

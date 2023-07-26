@@ -4,34 +4,41 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NumberDirective } from 'src/app/directives/only-numbers.directive';
 import { CRUDService } from 'src/app/crud.service';
-import { List } from '../list';
+import { Book } from '../book';
 import { Subscription } from 'rxjs';
+
 @Component({
-  selector: 'app-add-list',
+  selector: 'app-add-book',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDialogModule, MatButtonModule, MatInputModule],
-  templateUrl: './add-list.component.html',
-  styleUrls: ['./add-list.component.scss']
+  imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDialogModule, MatButtonModule, MatInputModule, NumberDirective],
+  templateUrl: './add-book.component.html',
+  styleUrls: ['./add-book.component.scss']
 })
-export class AddListComponent implements OnDestroy {
-  title = '';
-  listForm: FormGroup;
-  sub: Subscription | undefined
+export class AddBookComponent implements OnDestroy {
+
+  bookForm: FormGroup;
+  sub: Subscription | undefined;
 
   constructor(
-    public dialogRef: MatDialogRef<AddListComponent>,
+    public dialogRef: MatDialogRef<AddBookComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private CRUDservice: CRUDService,) {
-    this.listForm = this.fb.group({
-      title: ['']
+    this.bookForm = this.fb.group({
+      title: [''],
+      author: [''],
+      image: [''],
+      year: [''],
+      onList: false
     });
   }
 
+
   create() {
-    if (this.listForm.valid) {
-      this.CRUDservice.addList(this.listForm.value as List).subscribe((data) => {
+    if (this.bookForm.valid) {
+      this.sub = this.CRUDservice.addBook(this.bookForm.value as Book).subscribe((data) => {
         this.dialogRef.close(data);
       })
     }

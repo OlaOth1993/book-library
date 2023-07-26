@@ -1,7 +1,13 @@
 <div class="card-wrapper">
-  <mat-toolbar id="books-toolbar">My Books</mat-toolbar>
+  <mat-toolbar id="books-toolbar">My Books
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" (click)="openAddBookDialog()">Add Book
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar>
   <div *ngFor="let book of books()" class="card">
-    <app-bookcard [book]="book" [isAddToList]="true" (addToListClick)="openAddDialog(book)"></app-bookcard>
+    <app-bookcard [book]="book" [isAddToList]="true" (deleteBook)="openDeleteDialog(book.id)"
+      (addToListClick)="openAddDialog(book)"></app-bookcard>
   </div>
 
 </div>

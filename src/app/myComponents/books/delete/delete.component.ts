@@ -7,24 +7,26 @@ import { CRUDService } from 'src/app/crud.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-delete-list',
+  selector: 'app-delete',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatDialogModule, MatButtonModule],
-  templateUrl: './delete-list.component.html',
-  styleUrls: ['./delete-list.component.scss']
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.scss']
 })
-export class DeleteListComponent implements OnDestroy {
-  sub: Subscription | undefined
+export class DeleteComponent implements OnDestroy {
+  private sub: Subscription | undefined;
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteListComponent>,
+    public dialogRef: MatDialogRef<DeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private CRUDservice: CRUDService) { }
 
   delete() {
-    this.sub = this.CRUDservice.DeleteList(this.data.id).subscribe(() => {
-      this.dialogRef.close(this.data.id);
-    })
+    this.sub = this.CRUDservice.DeleteBook(this.data.id)
+      .subscribe(() => {
+        console.log('delete book')
+        this.dialogRef.close(this.data.id);
+      })
   }
 
   ngOnDestroy() {
