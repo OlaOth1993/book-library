@@ -14,7 +14,7 @@ Run `npm run lint`
 # Project Features
 
 In this project you can:
- 1- Browse your available books in the main page.
+ 1- Browse your available books in the main page and execute (Add/Delete) book.
  2- Add any book to one of your favourite available lists.
  3- Browse your lists by navigate to my lists page. And see listed books.
  4- Add new list, remove a book from any list and (drop and drag) the books to change the order.
