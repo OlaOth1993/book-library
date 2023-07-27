@@ -8,8 +8,8 @@ describe('DeleteBookComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DeleteBookComponent]
-    });
+    imports: [DeleteBookComponent]
+});
     fixture = TestBed.createComponent(DeleteBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

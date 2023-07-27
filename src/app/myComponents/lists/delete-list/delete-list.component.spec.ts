@@ -8,8 +8,8 @@ describe('DeleteListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DeleteListComponent]
-    });
+    imports: [DeleteListComponent]
+});
     fixture = TestBed.createComponent(DeleteListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

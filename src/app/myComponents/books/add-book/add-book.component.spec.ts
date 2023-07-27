@@ -8,8 +8,8 @@ describe('AddBookComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddBookComponent]
-    });
+    imports: [AddBookComponent]
+});
     fixture = TestBed.createComponent(AddBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

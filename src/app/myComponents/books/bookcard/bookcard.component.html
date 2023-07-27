@@ -17,11 +17,12 @@
         </p>
     </mat-card-content>
     <mat-card-actions>
-        <button *ngIf="!book.onList&&isAddToList" mat-button (click)="addToList(book)">Add to list
+        <button [class.hidden]="book.onList||!isAddToList" matTooltip="Add to list" mat-button
+            (click)="addToList(book)">
             <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
         </button>
-        <mat-divider [vertical]="true"></mat-divider>
-        <button mat-button (click)="delete(book.id)">
+        <span class="spacer"></span>
+        <button mat-button matTooltip="Delete" (click)="delete(book.id)">
             <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
         </button>
     </mat-card-actions>
