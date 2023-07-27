@@ -6,7 +6,7 @@
       "year": "1965",
       "author": "Frank Herbert",
       "image": "https://th.bing.com/th/id/R.91ce7d845af61203c6daa49e9bf66741?rik=CbAR6Z3wyqkFZQ&pid=ImgRaw&r=0",
-      "onList": false
+      "onList": true
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
       "title": "Fahrenheit 451",
       "year": "1953",
       "author": "Ray Bradbury",
-      "onList": true,
+      "onList": false,
       "image": "https://th.bing.com/th/id/R.771b27345a5515f8abece8e4616c25fd?rik=hlXTktk7OJjVzA&pid=ImgRaw&r=0"
     }
   ],
@@ -39,11 +39,11 @@
       "title": "Movies",
       "books": [
         {
-          "id": 3,
-          "title": "1984",
-          "year": "1949",
-          "author": "George Orwell",
-          "image": "https://th.bing.com/th/id/R.b9c0f16d77765d639d8bd6def6ccc122?rik=UC%2f3P4FKSUUtWA&riu=http%3a%2f%2fcrickhollowbooks.com.au%2fblog%2fwp-content%2fuploads%2f2012%2f05%2f9780141036144.jpg&ehk=nNAt0eHK1zSTMBmUBexnt0FVjMAHAH%2bBhp9T9U1lK2A%3d&risl=&pid=ImgRaw&r=0",
+          "id": 1,
+          "title": "Dune",
+          "year": "1965",
+          "author": "Frank Herbert",
+          "image": "https://th.bing.com/th/id/R.91ce7d845af61203c6daa49e9bf66741?rik=CbAR6Z3wyqkFZQ&pid=ImgRaw&r=0",
           "onList": true
         }
       ]
@@ -53,12 +53,12 @@
       "id": 4,
       "books": [
         {
-          "id": 4,
-          "title": "Fahrenheit 451",
-          "year": "1953",
-          "author": "Ray Bradbury",
-          "onList": false,
-          "image": "https://th.bing.com/th/id/R.771b27345a5515f8abece8e4616c25fd?rik=hlXTktk7OJjVzA&pid=ImgRaw&r=0"
+          "id": 3,
+          "title": "1984",
+          "year": "1949",
+          "author": "George Orwell",
+          "image": "https://th.bing.com/th/id/R.b9c0f16d77765d639d8bd6def6ccc122?rik=UC%2f3P4FKSUUtWA&riu=http%3a%2f%2fcrickhollowbooks.com.au%2fblog%2fwp-content%2fuploads%2f2012%2f05%2f9780141036144.jpg&ehk=nNAt0eHK1zSTMBmUBexnt0FVjMAHAH%2bBhp9T9U1lK2A%3d&risl=&pid=ImgRaw&r=0",
+          "onList": false
         }
       ]
     }

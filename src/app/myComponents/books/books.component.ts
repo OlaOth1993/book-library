@@ -12,6 +12,7 @@ import { AddBookComponent } from './add-book/add-book.component';
 import { CRUDService } from 'src/app/crud.service';
 import { Book } from './book';
 import { Subscription } from 'rxjs';
+import { List } from '../lists/list';
 
 @Component({
   standalone: true,
@@ -21,13 +22,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./books.component.scss']
 })
 export class BooksComponent implements OnDestroy {
-  sub: Subscription | undefined
+  sub: Subscription[] = []
 
   constructor(private CRUDservice: CRUDService,
     public dialog: MatDialog) { }
 
   //component signals
   books = this.CRUDservice.books;
+  lists = this.CRUDservice.lists;
 
 
   openAddBookDialog() {
@@ -79,17 +81,44 @@ export class BooksComponent implements OnDestroy {
           value.splice(index, 1);
         })
         //use signals update data
+
+        this.deleteBookList(id);
       }
     });
   }
 
+  //delete the book from a list if it is already in one
+  deleteBookList(id: number) {
+    const list = this.lists().find((list) => {
+      const book = list.books.find(book => book.id == id);
+      if (book)
+        return list
+      return null
+    })
+    let bookIndex = list?.books.findIndex(book => book.id == id)
+    let listIndex = this.lists().findIndex(x => x.id == list?.id)
+
+    this.lists()[listIndex].books.splice(bookIndex ? bookIndex : -1, 1);
+    this.updateListBook(this.lists()[listIndex]);
+
+  }
+
+  updateListBook(list: List) {
+    let sub2 = this.CRUDservice.updateListBook(list).subscribe();
+    this.sub.push(sub2);
+  }
   //ubdate the book status of being under list
   updateBookStatus(book: Book) {
-    this.sub = this.CRUDservice.updateBook(book).subscribe();
+    let sub1 = this.CRUDservice.updateBook(book).subscribe();
+    this.sub.push(sub1);
   }
 
   ngOnDestroy() {
-    this.sub?.unsubscribe();
+    if (this.sub.length > 0) {
+      this.sub.forEach((sub) => {
+        sub.unsubscribe();
+      })
+    }
   }
 }
 
